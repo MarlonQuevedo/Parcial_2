@@ -1,0 +1,76 @@
+POSTMAIL - API de Gestión de Envíos
+
+
+MONGODB_URI=mongodb://localhost:27017/postmail
+PORT=3000
+
+
+Inicializar créditos de un usuario
+POST /api/usuario/creditos
+Ejemplo:
+
+{
+    "usuarioId": "usuario123",
+    "plan": 1
+}
+
+Planes disponibles:
+
+Plan 1: $135 por 30 envíos
+Plan 2: $160 por 40 envíos
+Plan 3: $180 por 60 envíos
+
+
+Método GET
+/api/usuario/creditos/USUARIO123
+
+Método POST
+Envío
+
+POST /api/envios
+Ejemplo:
+
+{
+    "usuarioId": "usuario123",
+    "nombre": "Juan Pérez",
+    "direccion": "Calle Principal #123",
+    "telefono": "7777-7777",
+    "referencia": "Casa verde",
+    "observacion": "Entregar después de las 5pm",
+    "peso": 2.5
+}
+
+Ver tus envíos
+GET /api/envios/usuario123
+
+Eliminar un envío
+DELETE /api/envios/id de envío
+Productos
+
+
+Agregar un producto a tu envío
+POST /api/productos
+Ejemplo:
+
+{
+    "envioId": "aquí pone el id de envío",
+    "descripcion": "Paquete de ropa",
+    "peso": 2.5,
+    "bultos": 1,
+    "fechaEntrega": "2024-03-20"
+}
+
+ Reglas importantes del sistema
+El costo base de un envío es de $135
+Si tu paquete pesa más de 3lb pero menos de 6lb, el costo se duplica
+Si tu paquete pesa más de 6lb, el costo se triplica
+Si eliminas un envío, te devuelven el crédito
+
+Los envíos no se borran, solo se marcan como eliminados
+ Cómo está organizado el proyecto
+
+├── controllers/    Aquí están todas las funciones que manejan las peticiones
+├── models/         Aquí están los modelos de la base de datos
+├── routes/         Aquí están las rutas de la API
+├── config/         Aquí está la configuración de la base de datos
+└── app.js          Este es el archivo principal que inicia todo
